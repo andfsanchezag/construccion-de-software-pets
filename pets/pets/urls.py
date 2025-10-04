@@ -16,10 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from pets_app.views import create_pet, ping
+from pets_app.views import PetView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('pets/', create_pet, name='create_pet'),
-    path('', ping, name='ping'),
+    path('pets/', PetView.as_view()),  # POST
+    path('pets/<str:pet_id>/', PetView.as_view()),  # GET por id, PUT
+    path('pets/document/<str:documento>/', PetView.as_view()),  # GET por documento (path param)
 ]
